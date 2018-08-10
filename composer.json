@@ -1,0 +1,15 @@
+{
+    "name": "photogabble/mouse-battery",
+    "description": "Mouse Battery Graph",
+    "type": "project",
+    "require": {
+        "rodneyrehm/plist": "^2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Simon Dann",
+            "email": "simon.dann@gmail.com"
+        }
+    ]
+}
