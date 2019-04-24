@@ -100,6 +100,12 @@ class Collect extends Command
     private function displayProgress (int $batteryPercentage, OutputInterface $output) {
         $progressBar = new ProgressBar($output, 100);
 
+        if ('\\' !== \DIRECTORY_SEPARATOR || 'Hyper' === getenv('TERM_PROGRAM')) {
+            $progressBar->setEmptyBarCharacter('░'); // light shade character \u2591
+            $progressBar->setProgressCharacter('');
+            $progressBar->setBarCharacter('▓'); // dark shade character \u2593
+        }
+
         if ($batteryPercentage <= 12) {
             $format = time() . ' <comment>%percent:3s%%</comment> [%bar%] %message%';
         } else {
@@ -107,8 +113,6 @@ class Collect extends Command
         }
         $progressBar->setMessage(''); // @todo add eta
         $progressBar->setFormat($format);
-        $progressBar->setEmptyBarCharacter('.');
-        $progressBar->setProgressCharacter('|');
         $progressBar->setProgress($batteryPercentage);
         $progressBar->display();
         $output->writeln('');
