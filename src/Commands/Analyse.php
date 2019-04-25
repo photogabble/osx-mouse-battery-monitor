@@ -2,12 +2,10 @@
 
 namespace MouseBattery\Commands;
 
-use CFPropertyList\CFPropertyList;
-use CFPropertyList\IOException;
-use DOMException;
+
 use Exception;
+use MouseBattery\Segment;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
@@ -19,6 +17,13 @@ class Analyse extends Command
      * @var string Command Name
      */
     protected static $defaultName = 'analyse';
+
+    private $segmentPointer = 0;
+
+    /**
+     * @var array|Segment[]
+     */
+    private $segments = [];
 
     protected function configure()
     {
@@ -66,26 +71,18 @@ class Analyse extends Command
 
         $total = 0;
         $ignored = 0;
-        $array = [];
-
-        for ($i = 0; $i<= 100; $i++) {
-            $array[$i] = [
-                'last' => 0,
-                'seconds' => 0,
-            ];
-        }
 
         foreach ($fileData($inputPath) as $line) {
             $line = explode(',', str_replace(array("\r", "\n"), '', $line));
             if (count($line) !== 3) { $ignored++; continue; }
             $line = array_combine(['ts', 'BD_ADDR', 'percentage'], array_map(function($v){return str_replace('"', '', $v);}, $line));
+            $line['ts'] = (int) $line['ts'];
 
-            if ($array[$line['percentage']]['last'] === 0) {
-                $array[$line['percentage']]['last'] = (int) $line['ts'];
-            } else {
-                $d = (int) $line['ts'] - $array[$line['percentage']]['last'];
-                $array[$line['percentage']]['seconds'] += $d;
-                $array[$line['percentage']]['last'] = (int) $line['ts'];
+            if (count($this->segments) === 0) {
+                $this->addSegment($line);
+            } else if (! $this->segments[$this->segmentPointer-1]->add($line['ts'], $line['percentage'])){
+                $this->addSegment($line);
+                $this->segments[$this->segmentPointer-1]->add($line['ts'], $line['percentage']);
             }
 
             $total++;
@@ -94,12 +91,15 @@ class Analyse extends Command
         // We should segment the data into 15 minute blocks and work out min/max/mean percentage
         // in order to generate a candle-stick plot.
         // The segment size should be adjustable.
-
         // Looks like there is some jitter with percentage going 100 -> 97 -> 99 -> 99 -> 98 -> ...
-        var_dump($array);
 
-        $output->writeln(sprintf('Total Data Points: [<comment>%s</comment>]', number_format($total)));
+        $output->writeln(sprintf('Total Data Points: [<comment>%s</comment>], in [<comment>%s</comment>] segments.', number_format($total), number_format(count($this->segments))));
 
         return 0;
+    }
+
+    protected function addSegment(array $line) {
+        $this->segments[$this->segmentPointer] = new Segment($line['ts']);
+        $this->segmentPointer++;
     }
 }
