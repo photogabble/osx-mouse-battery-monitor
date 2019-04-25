@@ -77,18 +77,49 @@ class Collect extends Command
         }
 
         $batteryPercentage = (int) str_replace('%', '', $found['device_batteryPercent']);
-
-        if ($input->getOption('progress')) {
-            $this->displayProgress($batteryPercentage, $output);
-        }
+        $timestamp = 0;
 
         if ($path = $input->getOption('output_path')) {
             $this->writeToFile($batteryPercentage, $BD_ADDR ,$path);
+            $timestamp = $this->getFirstTimestamp($path);
+        }
+
+        if ($input->getOption('progress')) {
+            $this->displayProgress($batteryPercentage, $timestamp, $output);
         }
 
         return 0;
     }
 
+    /**
+     * Returns a timestamp for the first recorded sample.
+     *
+     * @param string $filename
+     * @return int
+     */
+    private function getFirstTimestamp(string $filename): int {
+        if (! file_exists($filename)) {
+            return 0;
+        }
+
+        // PHP implements RAII for resources so no need to fclose
+        $line = fgets(fopen($filename, 'r'));
+        $arr = explode(',', $line);
+
+        if (count($arr) !== 3) {
+            return 0;
+        }
+
+        return (int) str_replace('"', '', $arr[0]);
+    }
+
+    /**
+     * Writes current sample to disk.
+     *
+     * @param int $batteryPercentage
+     * @param string $id
+     * @param string $filename
+     */
     private function writeToFile(int $batteryPercentage, string $id, string $filename) {
         if (! file_exists($filename)) {
             touch($filename);
@@ -97,8 +128,17 @@ class Collect extends Command
         file_put_contents($filename, sprintf('"%s","%s","%s"'. PHP_EOL, time(), $id, str_replace('%', '', $batteryPercentage)), FILE_APPEND);
     }
 
-    private function displayProgress (int $batteryPercentage, OutputInterface $output) {
+    /**
+     * Display pretty output.
+     *
+     * @todo add eta?
+     * @param int $batteryPercentage
+     * @param int $firstTimestamp
+     * @param OutputInterface $output
+     */
+    private function displayProgress (int $batteryPercentage, int $firstTimestamp, OutputInterface $output) {
         $progressBar = new ProgressBar($output, 100);
+        $message = '';
 
         if ('\\' !== \DIRECTORY_SEPARATOR || 'Hyper' === getenv('TERM_PROGRAM')) {
             $progressBar->setEmptyBarCharacter('░'); // light shade character \u2591
@@ -111,11 +151,28 @@ class Collect extends Command
         } else {
             $format = '<info>%percent:3s%%</info> [%bar%] %message%';
         }
-        $progressBar->setMessage(''); // @todo add eta
+
+        if ($firstTimestamp > 0) {
+            $message = $this->dateDifference(time(), $firstTimestamp);
+        }
+
+        $progressBar->setMessage($message);
         $progressBar->setFormat($format);
         $progressBar->setProgress($batteryPercentage);
         $progressBar->display();
         $output->writeln('');
     }
 
+    private function dateDifference(int $from , int $to , $differenceFormat = '%d Days %h Hours' ): string
+    {
+        if (! $datetime1 = date_create("@$from")) {
+            return '';
+        }
+        if (! $datetime2 = date_create("@$to")) {
+            return '';
+        }
+
+        $interval = date_diff($datetime1, $datetime2);
+        return $interval->format($differenceFormat);
+    }
 }
