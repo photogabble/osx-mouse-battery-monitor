@@ -2,6 +2,7 @@
 
 namespace MouseBattery;
 
+use MouseBattery\Commands\Analyse;
 use MouseBattery\Commands\Collect;
 use Symfony\Component\Console\Application;
 
@@ -12,7 +13,8 @@ class MouseBattery extends Application
     {
         parent::__construct('Mouse Battery Monitor', '1.0.0');
         $this->addCommands([
-            new Collect
+            new Collect,
+            new Analyse
         ]);
     }
 
