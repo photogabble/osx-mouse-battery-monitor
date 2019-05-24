@@ -7,7 +7,7 @@
 * The fifth batch of batteries [_Industrial by Duracell, Alkaline AA_](storage-industrial-by-duracell-aa-1.csv) lasted for 5.43 weeks(38 days); the mouse is still switched off over nights and weekends.
 * The sixth batch of batteries [_Industrial by Duracell, Alkaline AA_](storage-industrial-by-duracell-aa-2.csv) lasted for 3.60 weeks(25 days); the mouse is still switched off over nights and weekends.
 * The seventh batch of batteries [_Industrial by Duracell, Alkaline AA_](storage-industrial-by-duracell-aa-3.csv) lasted for 5.31 weeks(37 days); the mouse is still switched off over nights and weekends.
-
+* The eighth batch of batteries [_Duracell Ultra Power Alkaline AA_](storage-duracel-ultra-power-aa-1.csv) lasted 5.26 weeks (36.84 days); the mouse was left on continuously.
 ## Resource:
 
 I use [this](https://iuliacazan.ro/timestamps-diff/) to calculate the diff between the last and first timestamps.
