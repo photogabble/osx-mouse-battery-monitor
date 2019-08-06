@@ -9,6 +9,7 @@
 * The seventh batch of batteries [_Industrial by Duracell, Alkaline AA_](storage-industrial-by-duracell-aa-3.csv) lasted for 5.31 weeks(37 days); the mouse is still switched off over nights and weekends.
 * The eighth batch of batteries [_Duracell Ultra Power Alkaline AA_](storage-duracel-ultra-power-aa-1.csv) lasted 5.26 weeks (36.84 days); the mouse was left on continuously.
 * The ninth batch of batteries [_Energizer Industrial, Pile Alkaline AA_](storage-energizer-industrial-aa-1.csv) ran down from 84% to 0% over four weeks without my mac switched on while the mouse was switched on. This energy draw is unexpected as the mouse wasn't in use and one would expect it to have gone into hibernation until awoken.
+* The tenth batch of batteries [_Duracell Ultra Powrer, Duralock. Alkaline AA](storage-duracell-ultra-power-duralock.csv) lasted 5.14 weeks. The mouse was largely left on and very occasionally switched off for transportation while working from home.
 
 ## Resource:
 
