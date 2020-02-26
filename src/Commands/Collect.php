@@ -76,6 +76,11 @@ class Collect extends Command
             return 2;
         }
 
+        if (!isset($found['device_batteryPercent'])) {
+            $output->writeln('<error>[!]</error> Unable to read device battery percentage, is the mouse connected?');
+            return 2;
+        }
+
         $batteryPercentage = (int) str_replace('%', '', $found['device_batteryPercent']);
         $timestamp = 0;
 
