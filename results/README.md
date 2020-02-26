@@ -14,6 +14,7 @@
 * The twelfth batch of batteries [GP Ultra, Alkaline AA](storage-gp-ultra-alkaline-aa-1.csv) lasted 4.98 weeks (34 days.) The mouse was largely left switched on.
 * The thirteenth batch of batteries [GP Ultra, Alkaline AA](storage-gp-ultra-alkaline-aa-2.csv) lasted 6.02 weeks (42 days.) It was left switched off for just over one week over Christmas.
 * The fourteenth batch of batteries [GP Ultra, Alkaline AA](storage-gp-ultra-alkaline-aa-3.csv) lasted 3.32 weeks (23 days.) The mouse was largely left switched on and got a _lot_ of use.
+* The fifteenth batch of batteries [Duracell Ultra, Alkaline AA](storage-duracell-ultra-alkaline-aa-1.csv) lasted 3.91 weeks (27 days.) The mouse was only really switched off at night and got a _lot_ of use.
 
 ## Resource:
 
