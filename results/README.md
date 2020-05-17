@@ -16,6 +16,7 @@
 * The fourteenth batch of batteries [GP Ultra, Alkaline AA](storage-gp-ultra-alkaline-aa-3.csv) lasted 3.32 weeks (23 days.) The mouse was largely left switched on and got a _lot_ of use.
 * The fifteenth batch of batteries [Duracell Ultra, Alkaline AA](storage-duracell-ultra-alkaline-aa-1.csv) lasted 3.91 weeks (27 days.) The mouse was only really switched off at night and got a _lot_ of use.
 * The sixteenth batch of batteries [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-1.csv) lasted 5.21 weeks (36.49 days.) The mouse was in heavy use for 8+ hours of the day and switched off at night.
+* The seventeenth batch of batteries [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-2.csv) lasted 6.22 weeks (43.53 days.) The mouse was in use throughout the day for 8+ hours and not often switched off.
 
 ## Resource:
 
