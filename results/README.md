@@ -19,6 +19,7 @@
 * The seventeenth batch of batteries [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-2.csv) lasted 6.22 weeks (43.53 days.) The mouse was in use throughout the day for 8+ hours and not often switched off.
 * The eighteenth batch of batteries [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-3.csv) lasted 4.92 weeks (34.45 days.) The mouse was in use for about 10-15 hours a day.
 * The nineteenth batch of batteries [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-4.csv) lasted 3.20 weeks (22.44 days.) The mouse was in use for about 15-20 hours a day.
+* The twentieth batch of batteries  [Ikea Alkalisk, Alkaline AA](storage-ikea-alkalisk-aa-5.csv) lasted 2.02 weeks (14.16 days.) This was surprisingly less than previous batches but the computer was being used over 10 hours a day.
 
 ## Resource:
 
